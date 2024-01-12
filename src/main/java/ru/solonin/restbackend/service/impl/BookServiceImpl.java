@@ -23,4 +23,9 @@ public class BookServiceImpl implements BookService {
     public BookInfo addBook(BookInfo bookInfo) {
         return repository.addBook(bookInfo);
     }
+
+    @Override
+    public BookInfo findBookByName(String bookName) {
+        return repository.findBookByName(bookName);
+    }
 }

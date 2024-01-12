@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public class BookRepository {
     private final List<BookInfo> BOOKS = new ArrayList<>();
+
     public BookInfo addBook(BookInfo bookInfo) {
         BOOKS.add(bookInfo);
         return bookInfo;
@@ -16,5 +17,12 @@ public class BookRepository {
 
     public List<BookInfo> booksList() {
         return BOOKS;
+    }
+
+    public BookInfo findBookByName(String bookName) {
+        return BOOKS.stream()
+                .filter(element -> element.getBookName().equals(bookName))
+                .findFirst()
+                .orElse(null);
     }
 }

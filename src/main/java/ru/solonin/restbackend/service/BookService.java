@@ -8,4 +8,5 @@ import java.util.List;
 public interface BookService {
     public List<BookInfo> booksList();
     public BookInfo addBook(BookInfo bookInfo);
+    public BookInfo findBookByName(String bookName);
 }
