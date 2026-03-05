@@ -21,13 +21,13 @@ public class BookController {
 
 
     @GetMapping
-    @ApiOperation("получение списка всех книг")
+    @ApiOperation(value = "Get all books", notes = "Returns the full list of books currently stored in the service")
     public List<BookInfo> getAllBooks() {
         return bookService.booksList();
     }
 
     @PostMapping
-    @ApiOperation("добавление книги")
+    @ApiOperation(value = "Create a book", notes = "Adds a new book record and returns the saved payload with confirmation message")
     public ResponseEntity<CreateBookResponse> addNewBook(@RequestBody BookInfo bookInfo) {
         BookInfo savedBook = bookService.addBook(bookInfo);
         return ResponseEntity
@@ -36,7 +36,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    @ApiOperation("поиск по названию книги")
+    @ApiOperation(value = "Search book by name", notes = "Looks up a book by its exact title and returns 404 if nothing was found")
     public BookInfo findBook(@RequestParam(name = "bookName") String bookName) {
         BookInfo foundBook = bookService.findBookByName(bookName);
         if (foundBook == null) {
