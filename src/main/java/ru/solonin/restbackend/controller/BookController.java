@@ -9,29 +9,29 @@ import ru.solonin.restbackend.service.BookService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/books")
 @AllArgsConstructor
 public class BookController {
 
     private final BookService bookService;
 
 
-    @GetMapping("book/getAll")
-    @ApiOperation("получение списка всех авторов")
-    public List<BookInfo> getAllAuthorsInfo() {
+    @GetMapping
+    @ApiOperation("получение списка всех книг")
+    public List<BookInfo> getAllBooks() {
         return bookService.booksList();
     }
 
-    @PostMapping("book/addBook")
+    @PostMapping
     @ApiOperation("добавление книги")
     public String addNewBook(@RequestBody BookInfo bookInfo) {
         bookService.addBook(bookInfo);
         return "Book successfully saved";
     }
 
-    @GetMapping("book/find/{name}")
+    @GetMapping("/search")
     @ApiOperation("поиск по названию книги")
-    public BookInfo findBook(@PathVariable String name) {
+    public BookInfo findBook(@RequestParam(name = "name") String name) {
         return bookService.findBookByName(name);
     }
 }
