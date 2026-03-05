@@ -1,6 +1,6 @@
 package ru.solonin.restbackend.controller;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +21,13 @@ public class BookController {
 
 
     @GetMapping
-    @ApiOperation(value = "Get all books", notes = "Returns the full list of books currently stored in the service")
+    @Operation(summary = "Get all books", description = "Returns the full list of books currently stored in the service")
     public List<BookInfo> getAllBooks() {
         return bookService.booksList();
     }
 
     @PostMapping
-    @ApiOperation(value = "Create a book", notes = "Adds a new book record and returns the saved payload with confirmation message")
+    @Operation(summary = "Create a book", description = "Adds a new book record and returns the saved payload with confirmation message")
     public ResponseEntity<CreateBookResponse> addNewBook(@RequestBody BookInfo bookInfo) {
         BookInfo savedBook = bookService.addBook(bookInfo);
         return ResponseEntity
@@ -36,7 +36,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    @ApiOperation(value = "Search book by name", notes = "Looks up a book by its exact title and returns 404 if nothing was found")
+    @Operation(summary = "Search book by name", description = "Looks up a book by its exact title and returns 404 if nothing was found")
     public BookInfo findBook(@RequestParam(name = "bookName") String bookName) {
         BookInfo foundBook = bookService.findBookByName(bookName);
         if (foundBook == null) {

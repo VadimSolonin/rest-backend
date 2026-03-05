@@ -1,6 +1,7 @@
 package ru.solonin.restbackend.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,10 +12,10 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ApiError> handleResponseStatusException(ResponseStatusException ex) {
-        HttpStatus status = ex.getStatus();
+        HttpStatusCode statusCode = ex.getStatusCode();
         return ResponseEntity
-                .status(status)
-                .body(new ApiError(String.valueOf(status.value()), ex.getReason(), null));
+                .status(statusCode)
+                .body(new ApiError(String.valueOf(statusCode.value()), ex.getReason(), null));
     }
 
     @ExceptionHandler(Exception.class)
