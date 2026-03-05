@@ -19,7 +19,7 @@ public class RestBackendApplication {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("ru.solonin.restbackend.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
